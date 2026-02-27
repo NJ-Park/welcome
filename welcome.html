@@ -3,32 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>특별한 초대장이 도착했습니다!</title>
   <meta property="og:image" content="./thumnail.png">
+  <title>특별한 초대장이 도착했습니다!</title>
   <style>
-    body { font-family: 'Pretendard', sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; padding: 20px; }
-    .card { background: white; width: 100%; max-width: 400px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); overflow: hidden; text-align: center; padding-bottom: 30px; }
+    body { font-family: 'Pretendard', sans-serif; background-color: #fdfcf0; display: flex; justify-content: center; padding: 20px; color: #333; }
+    .card { background: white; width: 100%; max-width: 400px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); overflow: hidden; text-align: center; border: 2px solid #eee; }
 
     /* 사진 영역 */
-    .photo-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; padding: 15px; background: #eee; }
-    .photo-container img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 10px; background: #ccc; }
+    .photo-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 20px; background: #fff; }
+    .photo-container img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 15px; background: #f0f0f0; border: 1px solid #ddd; }
 
     .event-info { background: #f8f9fa; padding: 15px; margin: 0 20px; border-radius: 15px; border: 1px solid #eee; }
     .info-item { font-size: 1.1rem; margin: 5px 0; font-weight: 600; color: #d32f2f; }
-    
-    h1 { font-size: 1.5rem; margin-top: 20px; color: #333; }
-    .quiz-container { padding: 20px; }
+
+    h1 { font-size: 1.4rem; margin: 25px 0 15px; color: #222; }
+    .quiz-container { padding: 0 20px 30px; }
 
     /* 버튼 스타일 */
-    .btn { display: block; width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #007bff; border-radius: 10px; background: white; color: #007bff; font-weight: bold; cursor: pointer; transition: 0.3s; }
-    .btn:hover { background: #007bff; color: white; }
+    .btn { display: block; width: 100%; padding: 14px; margin: 10px 0; border: 1.5px solid #333; border-radius: 12px; background: white; font-size: 1rem; cursor: pointer; transition: 0.2s; }
+    .btn:active { background: #f0f0f0; transform: scale(0.98); }
 
-    /* 쿠폰 영역 (기본 숨김) */
-    #coupon-area { display: none; margin-top: 20px; padding: 20px; background: #fff9c4; border: 2px dashed #fbc02d; border-radius: 15px; animation: fadeIn 0.5s; }
-    .coupon-title { font-size: 1.2rem; font-weight: bold; color: #f57f17; }
-    .coupon-code { font-size: 1.5rem; letter-spacing: 2px; color: #333; margin: 10px 0; }
+    /* 쿠폰 영역 (정답 시 노출) */
+    #coupon-area { display: none; margin: 0 20px 30px; padding: 20px; background: #fff9c4; border: 2px dashed #fbc02d; border-radius: 15px; animation: bounceIn 0.6s; }
+    .coupon-title { font-size: 1.2rem; font-weight: bold; color: #f57f17; margin-bottom: 10px; }
+    .coupon-benefit { font-size: 1.6rem; font-weight: 800; color: #333; }
 
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes bounceIn {
+      0% { opacity: 0; transform: scale(0.5); }
+      70% { transform: scale(1.05); }
+      100% { opacity: 1; transform: scale(1); }
+    }
   </style>
 </head>
 <body>
@@ -40,19 +44,18 @@
     <img src="./choi.png" alt="친구3">
   </div>
 
-    <div class="event-info">
+  <div class="event-info">
     <div class="info-item">📍 장소: 3층 르호봇홀</div>
-    <div class="info-item">⏰ 시간: 오후 6시</div>
+    <div class="info-item">⏰ 시간: 3월 1일 오후 6시</div>
   </div>
 
-  
   <h1>이 세 사람의 공통점은?</h1>
 
   <div class="quiz-container" id="quiz-box">
-    <button class="btn" onclick="checkAnswer(false)">모두 같은 동네에 산다</button>
+    <button class="btn" onclick="checkAnswer(false)">MBTI가 모두 같다</button>
     <button class="btn" onclick="checkAnswer(true)">생일이 3월 4일로 똑같다!</button>
-    <button class="btn" onclick="checkAnswer(false)">좋아하는 음식이 같다</button>
-    <button class="btn" onclick="checkAnswer(false)">고등학교 동창이다</button>
+    <button class="btn" onclick="checkAnswer(false)">최근에 같은 영화를 봤다</button>
+    <button class="btn" onclick="checkAnswer(false)">셋 다 민초파다</button>
   </div>
 
   <div id="coupon-area">
@@ -66,11 +69,11 @@
 <script>
   function checkAnswer(isCorrect) {
     if (isCorrect) {
-      alert("와우! 정확해요! 🎂");
+      alert("정답입니다! 쿠폰이 발급되었습니다. 🎂");
       document.getElementById('quiz-box').style.display = 'none'; // 퀴즈 숨기기
       document.getElementById('coupon-area').style.display = 'block'; // 쿠폰 보이기
     } else {
-      alert("땡! 다시 한 번 생각해보세요. 🤔");
+      alert("땡! 다시 한 번 생각해보세요. 장소와 시간은 확인하셨죠? 😉");
     }
   }
 </script>
